@@ -1,0 +1,135 @@
+.title {
+  text-align: center;
+  font-weight: bold;
+}
+
+.saldo-card {
+  padding: 16px;
+  margin: 10px;
+  margin-top: 50px;
+  text-align: center;
+  border-radius: 10px;
+}
+
+.info p {
+  font-size: 14px;
+  color: #555;
+}
+
+.highlight {
+  color: #000;
+  font-weight: bold;
+}
+
+.pagado {
+  color: rgb(0, 21, 128);
+  font-weight: bold;
+}
+
+.saldo h3 {
+  font-size: 16px;
+  color: #555;
+}
+
+.saldo h1 {
+  font-size: 32px;
+  color: #000;
+  font-weight: bold;
+}
+
+.medio {
+  color: #1900ff;
+}
+
+ion-range {
+  margin-top: 10px;
+}
+
+.pagar-btn {
+  margin-top: 10px;
+}
+
+.simular {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #073359;
+  margin-top: 10px;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.simular ion-icon {
+  font-size: 20px;
+  margin-right: 8px;
+}
+
+#titulo {
+  text-align: center;
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: #4880B8;
+  letter-spacing: 1px;
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+.headAdmin {
+  text-align: center;
+  font-size: 14px;
+  color: #5a5a5a;
+}
+
+ion-content {
+  --background: #f4f7fc;
+  padding: 15px;
+}
+
+ion-header {
+  --ion-background-color: #073359;
+}
+
+#title ion-header {
+  --background: #073359;
+}
+
+#header {
+  color: white;
+  text-align: center;
+  letter-spacing: 3px;
+}
+
+.saldo-container {
+  text-align: center;
+}
+
+/* ✅ Barra con color dinámico */
+.barra-container {
+  margin: 20px auto;
+  max-width: 90%;
+  text-align: center;
+}
+
+.barra-fondo {
+  width: 100%;
+  height: 16px;
+  background-color: #e0e0e0;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.2);
+}
+
+.barra-progreso {
+  height: 100%;
+  border-radius: 8px 0 0 8px;
+  transition: width 0.5s ease-in-out;
+}
+
+.barra-labels {
+  display: flex;
+  justify-content: space-between;
+  font-size: 13px;
+  padding-top: 6px;
+  padding-left: 4px;
+  padding-right: 4px;
+  color: #555;
+}

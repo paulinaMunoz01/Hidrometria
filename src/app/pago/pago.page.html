@@ -1,0 +1,72 @@
+<ion-header [translucent]="false" id="title">
+  <ion-toolbar class="toolbar-custom">
+    <ion-title id="header">HidroMetria</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" class="content-custom">
+  <div class="content-wrapper">
+    <div class="headAdmin">
+      <h2>Información de Pagos</h2>
+      <p>Informe de Pagos por el Consumo</p>
+    </div>
+
+    <ion-card class="saldo-card">
+      <!-- Selector de Mes -->
+      <ion-item>
+        <ion-label>Periodo:</ion-label>
+        <ion-select [(ngModel)]="selectedMes" (ionChange)="cargarDatosMes()">
+          <ion-select-option *ngFor="let mes of meses" [value]="mes.nombre">
+            {{ mes.nombre }}
+          </ion-select-option>
+        </ion-select>
+      </ion-item>
+
+      <!-- Información del saldo -->
+      <div class="info" *ngIf="datosMes">
+        <p><strong>Fecha límite de pago:</strong> {{ datosMes.fechaPago }}</p>
+        <p>
+          <strong>Estatus:</strong>
+          <span [ngClass]="{ 'pagado': datosMes.pagado, 'pendiente': !datosMes.pagado }">
+            {{ datosMes.pagado ? 'Pagado' : 'Pendiente' }}
+          </span>
+        </p>
+      </div>
+
+      <!-- Detalle del saldo -->
+      <div class="saldo" *ngIf="datosMes">
+        <h3>Saldo actual:</h3>
+        <h1>${{ datosMes.saldo }}</h1>
+        <p>{{ datosMes.consumo }} L consumo <span class="medio">{{ datosMes.nivel }}</span></p>
+      </div>
+
+      <!--  Barra de consumo dinámica por porcentaje -->
+      <div class="barra-container" *ngIf="datosMes">
+        <div class="barra-fondo">
+          <div
+            class="barra-progreso"
+            [ngStyle]="{
+              width: calcularPorcentaje(datosMes.consumo) + '%',
+              backgroundColor: obtenerColor(datosMes.consumo)
+            }"
+          ></div>
+        </div>
+        <div class="barra-labels">
+          <span>Bajo</span>
+          <span>Medio</span>
+          <span>Alto</span>
+        </div>
+      </div>
+
+      <!-- Botón de pago -->
+      <ion-button expand="full" class="pagar-btn" [disabled]="datosMes.pagado">
+        Pagar
+      </ion-button>
+
+      <!-- Simulación -->
+      <div class="simular">
+        <ion-icon name="bar-chart-outline"></ion-icon>
+      </div>
+    </ion-card>
+  </div>
+</ion-content>

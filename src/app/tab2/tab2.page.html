@@ -1,0 +1,117 @@
+<!-- Encabezado de la página -->
+<ion-header [translucent]="false" id="title">
+  <ion-toolbar class="toolbar-custom">
+    <ion-title id="header">HidroMetria</ion-title> <!-- Título en la barra superior -->
+  </ion-toolbar>
+</ion-header>
+
+<!-- Contenido principal de la página -->
+<ion-content [fullscreen]="true" class="content-custom">
+
+  <!-- Sección de encabezado del formulario -->
+  <div class="headAdmin">
+    <h2>Reportar Incidencias</h2>
+    <p>Reporta algún problema o incidencia</p>
+  </div>
+
+  <!-- Formulario para enviar una nueva incidencia -->
+  <div class="form-container">
+
+    <!-- Selección del tipo de incidencia -->
+    <ion-card class="form-card">
+      <ion-item class="form-item">
+        <ion-label class="form-label">Tipo de incidencia</ion-label>
+        <ion-select placeholder="Selecciona Una" [(ngModel)]="reportType">
+          <!-- Opciones disponibles para seleccionar -->
+          <ion-select-option value="Fuga de agua">Fuga de agua</ion-select-option>
+          <ion-select-option value="Falta de agua">Falta de agua</ion-select-option>
+          <ion-select-option value="Baja presion">Baja presión</ion-select-option>
+          <ion-select-option value="Agua sucia">Agua sucia</ion-select-option>
+          <ion-select-option value="Otro">Otro</ion-select-option>
+        </ion-select>
+      </ion-item>
+    </ion-card>
+
+    <!-- Campo de descripción del problema -->
+    <ion-card class="form-card">
+      <ion-item class="form-item">
+        <ion-label class="form-label" position="stacked">Descripción</ion-label>
+        <ion-textarea placeholder="Describe tu problema con detalle" [(ngModel)]="reportDescription"></ion-textarea>
+      </ion-item>
+    </ion-card>
+
+    <!-- Campo para indicar la ubicación del problema -->
+    <ion-card class="form-card">
+      <ion-item class="form-item">
+        <ion-label class="form-label" position="stacked">Ubicación</ion-label>
+        <ion-textarea placeholder="Ingresa la ubicación de manera exacta y precisa" [(ngModel)]="reportLocation"></ion-textarea>
+      </ion-item>
+    </ion-card>
+
+    <!-- Botón para enviar el reporte -->
+    <div class="form-button-container">
+      <ion-button class="btn-custom" (click)="submitReport()">Enviar Reporte</ion-button>
+    </div>
+  </div>
+
+  <!-- Sección para mostrar los reportes realizados por el usuario -->
+  <div class="mis-reportes" *ngIf="incidencias.length > 0">
+    <h2 class="titulo-reportes">Reportes</h2>
+
+    <div class="contenedor-tarjetas">
+      <!-- Recorremos cada incidencia y la mostramos en una tarjeta -->
+      <ion-card class="tarjeta-incidencia" *ngFor="let incidencia of incidencias">
+
+        <!-- Encabezado de la tarjeta -->
+        <ion-card-header class="header-incidencia">
+          <ion-card-title class="tipo-titulo">{{ incidencia.tipo }}</ion-card-title>
+          <ion-card-subtitle style="color: white;">
+            {{ incidencia.fecha | date:'medium' }}
+            <!-- Muestra el nombre del usuario si está disponible -->
+            <span *ngIf="incidencia.nombreUsuario" style="color: white;"> - {{ incidencia.nombreUsuario }}</span>
+          </ion-card-subtitle>
+        </ion-card-header>
+        
+        <!-- Contenido de la tarjeta: descripción, ubicación y estado -->
+        <ion-card-content class="contenido-incidencia">
+          <p><strong>Descripción:</strong> {{ incidencia.descripcion }}</p>
+          <p><strong>Ubicación:</strong> {{ incidencia.ubicacion }}</p>
+          <p>
+            <strong>Estado:</strong>
+            <!-- Muestra si está resuelto o pendiente con un estilo visual -->
+            <span [ngClass]="{'resuelto': incidencia.resuelto, 'pendiente': !incidencia.resuelto}">
+              {{ incidencia.resuelto ? 'Resuelto' : 'Pendiente' }}
+            </span>
+          </p>
+          
+          <!-- Botones de acción: solo para admins -->
+          <div class="botones-accion">
+            <!-- Botón para marcar como resuelto, solo si es admin y aún no está resuelto -->
+            @if (esAdmin && !incidencia.resuelto) {
+              <ion-button 
+                class="btn-accion" 
+                color="success"
+                (click)="cambiarEstadoIncidencia(incidencia)"
+                [disabled]="loading">
+                <ion-icon name="checkmark-outline" slot="start"></ion-icon>
+                <span *ngIf="!loading">Resuelto</span>
+                <ion-spinner *ngIf="loading" name="crescent"></ion-spinner>
+              </ion-button>
+            }
+
+            <!-- Botón para eliminar la incidencia -->
+            <ion-button 
+              class="btn-accion" 
+              color="danger"
+              (click)="eliminarIncidencia(incidencia)"
+              [disabled]="loadingDelete">
+              <ion-icon name="trash-outline" slot="start"></ion-icon>
+              <span *ngIf="!loadingDelete">Eliminar</span>
+              <ion-spinner *ngIf="loadingDelete" name="crescent"></ion-spinner>
+            </ion-button>
+          </div>
+        </ion-card-content>
+      </ion-card>
+    </div>
+  </div>
+</ion-content>

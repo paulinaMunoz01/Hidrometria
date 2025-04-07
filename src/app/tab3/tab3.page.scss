@@ -1,0 +1,203 @@
+/* Estilos generales */
+ion-content {
+  --background: #f4f7fc;
+  padding: 15px;
+}
+
+ion-header {
+  --ion-background-color: #073359;
+}
+
+ion-toolbar {
+  --background: #073359;
+}
+
+ion-title {
+  color: white;
+  text-align: center;
+  letter-spacing: 3px;
+  font-weight: 500;
+}
+
+/* Estilos para la tarjeta de perfil */
+.profile-card {
+  background: white;
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+  border-radius: 3px;
+  margin: 10px 0;
+  width: 100%;
+  max-width: 600px;
+  margin: 20px auto;
+}
+
+.profile-header {
+  background: #1a63d8;
+  color: white;
+  padding: 12px;
+  font-size: 18px;
+  font-weight: bold;
+  border-top-left-radius: 3px;
+  border-top-right-radius: 3px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  
+  ion-icon {
+    font-size: 24px;
+  }
+}
+
+.profile-content {
+  padding: 20px;
+  
+  ion-item {
+    --padding-start: 0;
+    --inner-padding-end: 0;
+    --border-color: #e0e0e0;
+    margin-bottom: 15px;
+    
+    ion-label {
+      font-weight: 600;
+      color: #073359;
+      min-width: 120px;
+    }
+    
+    ion-text {
+      color: #4a4a4a;
+      text-align: right;
+      flex: 1;
+    }
+  }
+}
+
+/* Estilos para el botón de cerrar sesión */
+.logout-button {
+  --background: #eb445a;
+  --background-hover: #d43248;
+  --background-activated: #d43248;
+  --background-focused: #d43248;
+  --border-radius: 8px;
+  margin-top: 25px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  
+  ion-icon {
+    margin-right: 8px;
+  }
+}
+
+/* Estilos para el estado de administrador */
+.admin-badge {
+  background: #073359;
+  color: white;
+  padding: 5px 10px;
+  border-radius: 15px;
+  font-size: 14px;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  margin-top: 10px;
+  
+  ion-icon {
+    font-size: 18px;
+  }
+}
+
+/* Estados de carga y error */
+.loading-container, .error-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 50vh;
+  text-align: center;
+  
+  ion-spinner, ion-icon {
+    width: 48px;
+    height: 48px;
+    margin-bottom: 16px;
+    color: #1a63d8;
+  }
+  
+  p {
+    color: #5a5a5a;
+    font-size: 16px;
+  }
+}
+
+.error-container {
+  ion-icon {
+    color: #eb445a;
+  }
+  
+  ion-button {
+    margin-top: 15px;
+    --color: #1a63d8;
+  }
+}
+
+/* Responsive adjustments */
+@media (max-width: 480px) {
+  .profile-content {
+    padding: 15px;
+    
+    ion-item {
+      --padding-start: 0;
+      --inner-padding-end: 0;
+      flex-direction: column;
+      align-items: flex-start;
+      
+      ion-text {
+        text-align: left;
+        margin-top: 5px;
+      }
+    }
+  }
+}
+
+/* Estilos para la tarjeta de perfil - Añadir márgenes laterales */
+.profile-card {
+  background: white;
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+  border-radius: 3px;
+  width: 100%;
+  max-width: 600px;
+  margin: 20px auto; /* Centrado horizontal con margen superior/inferior */
+}
+
+/* Ajustes responsive para pantallas pequeñas */
+@media (max-width: 480px) {
+  ion-content {
+    padding: 15px 10px; /* Reducir padding lateral en móviles */
+  }
+
+  .profile-card {
+    margin: 15px 10px; /* Margen más pequeño en móviles */
+    width: calc(100% - 20px); /* Asegurar que el ancho respete los márgenes */
+  }
+
+  .profile-content {
+    padding: 15px 10px; /* Reducir padding interno en móviles */
+    
+    ion-item {
+      flex-direction: column;
+      align-items: flex-start;
+      
+      ion-text {
+        text-align: left;
+        margin-top: 5px;
+        width: 100%;
+      }
+    }
+  }
+
+  .logout-button {
+    width: calc(100% - 20px); /* Ajustar ancho del botón */
+    margin: 25px 10px 0; /* Margen consistente */
+  }
+}
+
+ion-card-title{
+  color: #ffffff;
+}

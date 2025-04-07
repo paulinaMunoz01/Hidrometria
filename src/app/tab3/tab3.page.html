@@ -1,0 +1,75 @@
+<!-- Cabecera de la aplicación - Barra superior -->
+<ion-header>
+  <ion-toolbar>
+    <ion-title>HidroMetria</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<!-- Contenido principal de la página -->
+<ion-content>
+  <div *ngIf="isLoading" class="loading-container">
+    <ion-spinner name="crescent"></ion-spinner>
+    <p>Cargando datos del perfil...</p>
+  </div>
+
+  <!-- Estado de error: se muestra cuando hay un problema al cargar -->
+  <div *ngIf="!isLoading && errorMessage" class="error-container">
+    <ion-icon name="warning"></ion-icon>
+    <p>{{errorMessage}}</p>
+    <!-- Botón para reintentar la carga de datos -->
+    <ion-button fill="clear" (click)="reloadUserData()">
+      <ion-icon name="refresh" slot="start"></ion-icon>
+      Reintentar
+    </ion-button>
+  </div>
+
+  <!-- Estado exitoso: muestra los datos del usuario cuando la carga es correcta -->
+  <div *ngIf="!isLoading && userData && !errorMessage" class="profile-container">
+    <br><br><br><br>
+    
+    <!-- Tarjeta contenedora del perfil -->
+    <ion-card class="profile-card">
+      <ion-card-header class="profile-header">
+        <ion-icon name="person-circle"></ion-icon>
+        <ion-card-title>INFORMACIÓN DEL PERFIL</ion-card-title>
+      </ion-card-header>
+
+      <!-- Contenido principal de la tarjeta -->
+      <ion-card-content class="profile-content">
+        <!-- Item para mostrar el nombre de usuario -->
+        <ion-item>
+          <ion-label>Usuario:</ion-label>
+          <ion-text>{{userData.username || 'No especificado'}}</ion-text>
+        </ion-item>
+
+        <!-- Item para mostrar el nombre completo -->
+        <ion-item>
+          <ion-label>Nombre:</ion-label>
+          <ion-text>{{userData.name || 'No especificado'}}</ion-text>
+        </ion-item>
+
+        <!-- Item para mostrar la dirección -->
+        <ion-item>
+          <ion-label>Dirección:</ion-label>
+          <ion-text>{{userData.direccion || 'No especificado'}}</ion-text>
+        </ion-item>
+
+        <!-- Badge especial que solo aparece si el usuario es admin -->
+        <div *ngIf="userData.admin" class="admin-badge">
+          <ion-icon name="shield-checkmark"></ion-icon>
+          <span>Administrador</span>
+        </div>
+
+        <!-- Botón para cerrar sesión -->
+        <ion-button 
+          expand="block"
+          class="logout-button"
+          (click)="cerrarSesion()">  <!-- Evento click -->
+          <!-- Icono de salida -->
+          <ion-icon name="log-out" slot="start"></ion-icon>
+          CERRAR SESIÓN
+        </ion-button>
+      </ion-card-content>
+    </ion-card>
+  </div>
+</ion-content>
